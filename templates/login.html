@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - mHealth</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f0f9ff; /* Match the light blue background from the home page */
+        }
+
+        .login-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8); /* Light overlay */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            text-align: center;
+            color: #01579b; /* Darker blue for heading */
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #01579b;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        .footer {
+            background-color: #bbdefb;
+            color: #01579b;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .footer a {
+            color: #01579b;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bbdefb;">
+    <a class="navbar-brand" href="/">mHealth</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/welcome_contact" style="color: #01579b; font-size: 1.1rem;">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/welcome_about" style="color: #01579b; font-size: 1.1rem;">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/signup" style="color: #01579b; font-size: 1.1rem;">Sign-Up</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Login Form -->
+<!-- Login Form -->
+<div class="login-section">
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <h3>Login to mHealth</h3>
+        
+        <!-- Display error messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        
+        <label for="username">Username</label>
+        <input type="text" placeholder="Enter Username" id="username" name="username">
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter Password" id="password" name="password">
+
+        <button type="submit">Log In</button>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="{% url 'signup' %}" style="color: #01579b;">Create an account</a><br>
+            <a href="{% url 'password_reset' %}" style="color: #01579b;">Forgot Password?</a>
+        </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 mHealth. All Rights Reserved.</p>
+    <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
+

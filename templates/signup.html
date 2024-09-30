@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page with Consent Form and OTP Verification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    <style media="screen">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f9ff;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .form-column {
+            flex: 1;
+            min-width: 300px;
+            padding: 0 15px;
+        }
+
+        form h3 {
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+            color: #01579b;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"], select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .checkbox-group label, .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: normal;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #01579b;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0288d1;
+        }
+
+        .otp-section {
+            display: none;
+            width: 100%;
+        }
+
+        .footer {
+            background-color: #bbdefb;
+            color: #01579b;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #01579b;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-column {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bbdefb;">
+    <a class="navbar-brand" href="/">mHealth</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/welcome_contact" style="color: #01579b; font-size: 1.1rem;">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/welcome_about" style="color: #01579b; font-size: 1.1rem;">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}" style="color: #01579b; font-size: 1.1rem;">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Signup Form with Consent -->
+<div class="content">
+    <form id="signup-form" action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        {{ signup_form.as_p }}
+        {{ consent_form.as_p }}
+
+
+        <h3>Signup and Consent Form</h3>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: red; width: 100%; text-align: center;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <div class="form-column">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Username" name="username" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Email" name="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password1">Password</label>
+                <input type="password" placeholder="Password" id="password1" name="password1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <input type="password" placeholder="Confirm Password" id="password2" name="password2" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" placeholder="Age" name="age" id="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" id="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="height">Height (cm)</label>
+                <input type="number" placeholder="Height in cm" name="height" id="height" required>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" placeholder="Weight in kg" name="weight" id="weight" required>
+            </div>
+        </div>
+
+        <div class="form-column">
+            <div class="form-group">
+                <label>Do you experience any of the following symptoms? (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="symptoms" value="Chest pain"> Chest pain</label>
+                    <label><input type="checkbox" name="symptoms" value="Shortness of breath"> Shortness of breath</label>
+                    <label><input type="checkbox" name="symptoms" value="Palpitations"> Palpitations</label>
+                    <label><input type="checkbox" name="symptoms" value="Dizziness"> Dizziness</label>
+                    <label><input type="checkbox" name="symptoms" value="No symptoms"> No symptoms</label>
+                    <label><input type="checkbox" name="symptoms" value="Other"> Other</label>
+                </div>
+                <input type="text" name="symptom_other" placeholder="Please specify other symptoms" style="margin-top: 5px;">
+            </div>
+
+            <div class="form-group">
+                <label>Do you have any metabolic conditions? (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="metabolic_conditions" value="Type 1 Diabetes"> Type 1 Diabetes</label>
+                    <label><input type="checkbox" name="metabolic_conditions" value="Type 2 Diabetes"> Type 2 Diabetes</label>
+                    <label><input type="checkbox" name="metabolic_conditions" value="Prediabetes"> Prediabetes</label>
+                    <label><input type="checkbox" name="metabolic_conditions" value="No metabolic conditions"> None</label>
+                    <label><input type="checkbox" name="metabolic_conditions" value="Other"> Other</label>
+                </div>
+                <input type="text" name="metabolic_other" placeholder="Please specify other conditions" style="margin-top: 5px;">
+            </div>
+
+            <div class="form-group">
+                <label>Do you have any sleep disorders? (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="sleep_disorders" value="Insomnia"> Insomnia</label>
+                    <label><input type="checkbox" name="sleep_disorders" value="Sleep Apnea"> Sleep Apnea</label>
+                    <label><input type="checkbox" name="sleep_disorders" value="Restless Legs Syndrome"> Restless Legs Syndrome</label>
+                    <label><input type="checkbox" name="sleep_disorders" value="No sleep disorders"> None</label>
+                    <label><input type="checkbox" name="sleep_disorders" value="Other"> Other</label>
+                </div>
+                <input type="text" name="sleep_other" placeholder="Please specify other disorders" style="margin-top: 5px;">
+            </div>
+
+            <div class="form-group">
+                <label for="consent">I consent to the collection and processing of my personal data.</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="consent" required> I agree</label>
+                </div>
+            </div>
+            
+        <div class="otp-section" id="otp-section">
+            <label for="otp">Enter OTP</label>
+            <input type="text" placeholder="Enter OTP" name="otp" id="otp" required>
+        </div>
+
+        <button type="button" id="otp-button">Send OTP</button>
+        <button type="submit" id="verify-button" style="display: none;">Verify OTP</button>
+
+        <a href="{% url 'login' %}">I already have an account</a>
+        </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 mHealth. All rights reserved.</p>
+    <p><a href="/privacy_policy">Privacy Policy</a> | <a href="/terms_of_service">Terms of Service</a></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script>
+    const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    document.getElementById('otp-button').addEventListener('click', function() {
+        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
+        const password1 = document.getElementById('password1').value;
+        const password2 = document.getElementById('password2').value;
+
+        if (email && username && password1 && password2) {
+            fetch('/send-otp/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ email: email, username: username })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('otp-section').style.display = 'block';
+                    document.getElementById('otp-button').style.display = 'none';
+                    document.getElementById('verify-button').style.display = 'block';
+                } else {
+                    alert(data.message || 'Error sending OTP.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            alert('Please fill all fields before requesting OTP.');
+        }
+    });
+
+    document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const otp = document.getElementById('otp').value;
+
+        if (otp) {
+            fetch('/verify-otp/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrftoken
+                },
+                body: new URLSearchParams(new FormData(this))
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/login/';
+                } else {
+                    alert(data.message || 'Invalid OTP. Please retry.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            alert('Please enter the OTP.');
+        }
+    });
+</script>
+
+</body>
+</html>

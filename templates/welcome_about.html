@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>About Us</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f9ff; /* Very light blue */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Ensure body takes at least the full height of the viewport */
+        margin: 0; /* Remove default margin */
+      }
+
+      .container {
+        flex: 1; /* Allow container to expand and fill available space */
+      }
+
+      .navbar {
+        background-color: #bbdefb; /* Slightly darker light blue */
+      }
+
+      .navbar-nav .nav-link {
+        color: #01579b; /* Darker blue */
+        font-size: 1.1rem;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #003c8f; /* Even darker blue */
+      }
+
+      .about-header {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #01579b; /* Darker blue for header text */
+      }
+
+      .about-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-section {
+        margin-bottom: 40px;
+      }
+
+      .about-section h4 {
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        color: #01579b; /* Darker blue for section headings */
+      }
+
+      .team-member {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .team-member img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+      }
+
+      .team-member h5 {
+        margin-bottom: 5px;
+      }
+
+      .team-member p {
+        color: #6c757d;
+        font-size: 0.9rem;
+      }
+
+      .footer {
+        background-color: #bbdefb; /* Slightly darker light blue */
+        color: #01579b; /* Darker blue */
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer a {
+        color: #01579b; /* Darker blue */
+        margin: 0 10px;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Static Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="/">mHealth</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/welcome_contact">Contact Us</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/welcome_about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- About Header -->
+      <div class="about-header">
+        <h1>About Us</h1>
+        <p>Learn more about our mission, vision, and the amazing team behind mHealth.</p>
+      </div>
+
+      <!-- Company Overview -->
+      <div class="about-section">
+        <h4>Our Company</h4>
+        <p>mHealth is dedicated to improving healthcare through innovative solutions and technology. Our team of experts works tirelessly to create products that make a difference in the lives of patients and healthcare providers alike.</p>
+      </div>
+
+      <!-- Mission Statement -->
+      <div class="about-section">
+        <h4>Our Mission</h4>
+        <p>Our mission is to revolutionize healthcare by delivering state-of-the-art products and services that empower individuals to take control of their health and well-being. We believe in a future where healthcare is more accessible, personalized, and efficient.</p>
+      </div>
+
+      <!-- Team Section -->
+      <div class="about-section">
+        <h4>Meet the Team</h4>
+        <div class="row">
+          <div class="col-md-4 team-member">
+            <img src="https://via.placeholder.com/150" alt="Team Member 1">
+            <h5>Sujoy Deb</h5>
+            <p>CEO & Founder</p>
+          </div>
+          <div class="col-md-4 team-member">
+            <img src="https://via.placeholder.com/150" alt="Team Member 2">
+            <h5>Vipul</h5>
+            <p>Chief Technology Officer</p>
+          </div>
+          <div class="col-md-4 team-member">
+            <img src="https://via.placeholder.com/150" alt="Team Member 3">
+            <h5>Krish Kumar Bhoruka</h5>
+            <p>Chief Marketing Officer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2024 mHealth. All Rights Reserved.</p>
+      <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a>
+    </div>
+
+    <!-- Bootstrap and JQuery Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/RA5hiA0tvTO3K4pI7b8qhXb3Ftz5mLe6df59P5G8xvFN8K8y0bmFjG" crossorigin="anonymous"></script>
+  </body>
+</html>
